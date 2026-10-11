@@ -64,7 +64,7 @@ export default function Hero() {
           <p>॥ Shree Laxminarasimha Prasanna ॥</p>
           <p>॥ Shree Nuggikeri Balabhima Prasanna ॥</p>
           <p>॥ Shree Yallammadevi Prasanna ॥</p>
-          <p className="invocation__bless">Parama Blessings for</p>
+          <p className="invocation__bless">With Parama Blessings of</p>
           <p className="invocation__guru">Parama Poojya Shree Shree 1008 Shree Satyatma Teertha Shreepadangalavaru</p>
         </div>
         <h1>{GROOM.name} <span>&amp;</span> {BRIDE.name}</h1>
