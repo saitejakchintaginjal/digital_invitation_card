@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 const LINKS = [
   ["names", "Couple"],
   ["timeline", "Events"],
-  ["mandap", "Mandap"],
   ["about", "Bride & Groom"],
   ["gallery", "Gallery"],
   ["know", "Know"],

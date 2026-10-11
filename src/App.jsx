@@ -3,7 +3,6 @@ import Nav from "./components/Nav.jsx";
 import Hero from "./components/Hero.jsx";
 import Names from "./components/Names.jsx";
 import Timeline from "./components/Timeline.jsx";
-import Mandap from "./components/Mandap.jsx";
 import About from "./components/About.jsx";
 import Gallery from "./components/Gallery.jsx";
 import Know from "./components/Know.jsx";
@@ -23,7 +22,6 @@ export default function App() {
       <Hero />
       <Names />
       <Timeline />
-      <Mandap />
       <About />
       <Gallery />
       <Know />

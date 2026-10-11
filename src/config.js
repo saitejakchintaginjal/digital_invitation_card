@@ -1,6 +1,6 @@
 // Single source of truth for the invitation details.
 export const GROOM = { name: "Rochan", parents: "Mr. & Mrs. Desai" };
-export const BRIDE = { name: "Nikita", parents: "Mr. & Mrs." }; // add the surname when known
+export const BRIDE = { name: "Nikita", parents: "Mr. & Mrs. Savanur" };
 
 export const VENUE = {
   name: "Tekfarm Retreat and Marriage Hall",
