@@ -59,7 +59,14 @@ export default function Hero() {
   return (
     <header className="hero" id="hero">
       <div className="hero__text">
-        <p className="eyebrow">॥ Shree Ganeshaya Namah ॥</p>
+        <div className="invocation">
+          <p className="invocation__shree"><span lang="sa">श्री</span></p>
+          <p>॥ Shree Laxminarasimha Prasanna ॥</p>
+          <p>॥ Shree Nuggikeri Balabhima Prasanna ॥</p>
+          <p>॥ Shree Yallammadevi Prasanna ॥</p>
+          <p className="invocation__bless">Parama Blessings for</p>
+          <p className="invocation__guru">Parama Poojya Shree Shree 1008 Shree Satyatma Teertha Shreepadangalavaru</p>
+        </div>
         <h1>{GROOM.name} <span>&amp;</span> {BRIDE.name}</h1>
         <p className="hero__sub">Together with their families, invite you to celebrate their wedding</p>
       </div>
