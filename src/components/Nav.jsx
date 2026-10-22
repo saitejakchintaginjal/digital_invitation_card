@@ -17,10 +17,10 @@ export default function Nav() {
 
   useEffect(() => {
     const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id === "hero" ? "" : e.target.id)),
       { rootMargin: "-45% 0px -50% 0px" }
     );
-    LINKS.forEach(([id]) => { const el = document.getElementById(id); if (el) io.observe(el); });
+    ["hero", ...LINKS.map(([id]) => id)].forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el); });
     return () => io.disconnect();
   }, []);
 

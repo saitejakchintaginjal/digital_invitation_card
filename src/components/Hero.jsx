@@ -4,17 +4,25 @@ import heroImg from "../assets/hero.jpg";
 import Garland from "./Garland.jsx";
 import Heart from "./Heart.jsx";
 
-const PETAL_KINDS = ["marigold", "marigold", "rose", "rice", "rice", "jasmine"];
+// Flower shapes (#fl-m marigold, #fl-r rose, #fl-j jasmine) come from the shared <Defs />; "petal" is a loose rose petal.
+const MARIGOLD = ["#f08a1c", "#f5a623", "#f9c22e", "#ff9d2e"];
+const ROSE = ["#d6214a", "#e5557f", "#c4163d"];
+const KINDS = ["m", "m", "r", "j", "p", "m", "j", "p", "r", "m"];
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-// Falling marigold petals, rose petals and rice, plus twinkling lights.
+// Showering marigolds, roses, jasmine and loose petals, plus twinkling lights.
 function Confetti() {
-  const { petals, lights } = useMemo(() => {
-    const r = (a, b) => a + Math.random() * (b - a);
+  const { flowers, lights } = useMemo(() => {
+    const r = (x, y) => x + Math.random() * (y - x);
     return {
-      petals: Array.from({ length: 26 }, (_, i) => ({
-        kind: PETAL_KINDS[i % PETAL_KINDS.length],
-        left: r(0, 100), size: r(7, 15), dur: r(7, 13), delay: -r(0, 13), dx: r(-70, 70), spin: r(-540, 540),
-      })),
+      flowers: Array.from({ length: 34 }, (_, i) => {
+        const kind = KINDS[i % KINDS.length];
+        const color = kind === "m" ? pick(MARIGOLD) : kind === "j" ? "#fffdf5" : pick(ROSE);
+        return {
+          kind, color,
+          left: r(-2, 100), size: kind === "p" ? r(13, 22) : r(20, 36), dur: r(6.5, 11), delay: -r(0, 11), dx: r(-90, 90), spin: r(-420, 420), tumble: r(1.6, 3.2),
+        };
+      }),
       lights: Array.from({ length: 16 }, () => ({ left: r(2, 98), top: r(2, 45), size: r(3, 7), dur: r(1.6, 3.4), delay: -r(0, 3) })),
     };
   }, []);
@@ -24,12 +32,16 @@ function Confetti() {
       {lights.map((l, i) => (
         <span key={`l${i}`} className="fx-light" style={{ left: `${l.left}%`, top: `${l.top}%`, width: l.size, height: l.size, animationDuration: `${l.dur}s`, animationDelay: `${l.delay}s` }} />
       ))}
-      {petals.map((p, i) => (
+      {flowers.map((f, i) => (
         <span
-          key={`p${i}`}
-          className={`fx-petal fx-petal--${p.kind}`}
-          style={{ left: `${p.left}%`, width: p.size, height: p.kind === "rice" ? p.size * 0.45 : p.size, animationDuration: `${p.dur}s`, animationDelay: `${p.delay}s`, "--dx": `${p.dx}px`, "--spin": `${p.spin}deg` }}
-        />
+          key={`f${i}`}
+          className="fx-flower"
+          style={{ left: `${f.left}%`, width: f.size, animationDuration: `${f.dur}s`, animationDelay: `${f.delay}s`, "--dx": `${f.dx}px`, "--spin": `${f.spin}deg` }}
+        >
+          <svg className="fx-flower__svg" viewBox="-12 -12 24 24" style={{ color: f.color, animationDuration: `${f.tumble}s` }}>
+            {f.kind === "p" ? <path d="M0 9 C-7 5 -8 -5 0 -11 C8 -5 7 5 0 9Z" fill="currentColor" stroke="rgba(70,0,15,.35)" strokeWidth=".6" /> : <use href={`#fl-${f.kind}`} />}
+          </svg>
+        </span>
       ))}
     </>
   );

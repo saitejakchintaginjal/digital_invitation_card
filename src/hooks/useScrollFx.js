@@ -12,6 +12,7 @@ export default function useScrollFx() {
     const stage = document.querySelector(".hero__stage");
     const text = document.querySelector(".hero__text");
     const hero = document.getElementById("hero");
+    const garlands = document.querySelectorAll(".garland");
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     let max = 1;
@@ -28,6 +29,9 @@ export default function useScrollFx() {
       raf = 0;
       const y = window.scrollY;
       if (bar) bar.style.transform = `scaleX(${Math.min(1, y / max)})`;
+      // garlands make way for the menu bar: fully visible at the top, gone after ~100px of scroll
+      const g = String(Math.max(0, 1 - y / 100));
+      garlands.forEach((el) => { if (el.style.opacity !== g) el.style.opacity = g; });
       if (reduce || !stage || !text) return;
       const hy = Math.min(y, heroH);
       if (hy === lastHeroY) return; // already parked past the hero
