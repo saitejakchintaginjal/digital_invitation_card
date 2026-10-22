@@ -1,4 +1,5 @@
 import { GROOM, BRIDE } from "../config.js";
+import Heart from "./Heart.jsx";
 import groomImg from "../assets/story/groom-portrait.jpg";
 import brideImg from "../assets/story/bride-portrait.jpg";
 
@@ -20,7 +21,7 @@ export default function About() {
             <p>Son of {GROOM.parents} &mdash; calm, warm-hearted and always ready with a smile, he is looking forward to beginning this new chapter surrounded by family and friends.</p>
           </figcaption>
         </figure>
-        <div className="about__amp">&amp;</div>
+        <div className="about__amp"><span className="about__line" /><Heart /><span className="about__line" /></div>
         <figure className="person">
           <div className="frame">
             <img src={brideImg} alt={BRIDE.name} loading="lazy" style={{ objectPosition: "50% 30%" }} />

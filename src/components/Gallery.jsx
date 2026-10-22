@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { GROOM, BRIDE } from "../config.js";
+import Heart from "./Heart.jsx";
 import groomChild from "../assets/story/groom.jpg";
 import brideChild from "../assets/story/bride.jpg";
 import coupleImg from "../assets/story/couple.jpg";
@@ -98,10 +99,13 @@ export default function Gallery() {
         <Polaroid photo={STORY[0]} index={0} side="l" onOpen={setOpen} />
 
         <div className="story__thread" aria-hidden="true">
-          <svg viewBox="0 0 200 120">
+          <svg viewBox="0 12 200 96">
             <path className="thread" d="M0 60 C40 10 70 10 100 60 C130 110 160 110 200 60" />
-            <g className="thread__heart" transform="translate(100 60)">
-              <path d="M0 10 C-22 -6 -14 -22 0 -11 C14 -22 22 -6 0 10Z" />
+            {/* outer group positions the heart; the inner group is the one that beats */}
+            <g transform="translate(100 60)">
+              <g className="thread__heart">
+                <path d="M0 10 C-22 -6 -14 -22 0 -11 C14 -22 22 -6 0 10Z" />
+              </g>
             </g>
           </svg>
           <span>Written in the stars</span>
@@ -128,7 +132,7 @@ export default function Gallery() {
             No grand words were needed &mdash; just a glance, a gentle touch and a smile that said it all. In each
             other, {GROOM.name} and {BRIDE.name} found a friend, a partner and a home.
           </p>
-          <span className="feature__sign" aria-hidden="true">{GROOM.name} <i>&amp;</i> {BRIDE.name}</span>
+          <span className="feature__sign" aria-hidden="true">{GROOM.name} <Heart /> {BRIDE.name}</span>
         </div>
       </div>
 

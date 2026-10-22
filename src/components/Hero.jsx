@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { GROOM, BRIDE } from "../config.js";
 import heroImg from "../assets/hero.jpg";
 import Garland from "./Garland.jsx";
+import Heart from "./Heart.jsx";
 
 const PETAL_KINDS = ["marigold", "marigold", "rose", "rice", "rice", "jasmine"];
 
@@ -40,13 +41,14 @@ export default function Hero() {
       <div className="hero__text">
         <div className="invocation">
           <p className="invocation__shree"><span lang="sa">श्री</span></p>
-          <p>॥ Shree Laxminarasimha Prasanna ॥</p>
-          <p>॥ Shree Nuggikeri Balabhima Prasanna ॥</p>
-          <p>॥ Shree Yallammadevi Prasanna ॥</p>
+          <p>॥&nbsp;Shree Laxmi Venkateshwara Swamy Prasanna&nbsp;॥</p>
+          <p>॥&nbsp;Shree Laxminarasimha Prasanna&nbsp;॥</p>
+          <p>॥&nbsp;Shree Nuggikeri Balabhima Prasanna&nbsp;॥</p>
+          <p>॥&nbsp;Shree Yallammadevi Prasanna&nbsp;॥</p>
           <p className="invocation__bless">With Parama Blessings of</p>
           <p className="invocation__guru">Parama Poojya Shree Shree 1008 Shree Satyatma Teertha Shreepadangalavaru</p>
         </div>
-        <h1>{GROOM.name} <span>&amp;</span> {BRIDE.name}</h1>
+        <h1>{GROOM.name} <Heart /> {BRIDE.name}</h1>
         <p className="hero__sub">Together with their families, invite you to celebrate their wedding</p>
       </div>
 

@@ -1,3 +1,4 @@
+import Heart from "./Heart.jsx";
 export default function Footer() {
   return (
     <>
@@ -15,7 +16,7 @@ export default function Footer() {
     </g>
   </svg>
   <p className="footer__brand">Teja Designs</p>
-  <p className="footer__small">Crafted with love · Rochan &amp; Nikita · 2026</p>
+  <p className="footer__small">Crafted with love · Rochan <Heart /> Nikita · 2026</p>
 </footer>
     </>
   );

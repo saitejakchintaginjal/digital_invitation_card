@@ -20,8 +20,8 @@ export const DAYS = [
   {
     date: "2026-12-14",
     events: [
-      { id: "muhurtham", title: "Muhuratam", time: "8:42 AM", feature: true },
-      { id: "akshata", title: "Akshata", time: "12:30 PM" },
+      { id: "muhurtham", title: "Muhurtam", time: "8:42 AM", feature: true },
+      { id: "akshata", title: "Akshate", time: "12:30 PM" },
     ],
   },
 ];
@@ -31,3 +31,4 @@ export const WEDDING_DATE = new Date("2026-12-13T17:00:00");
 const fmt = (iso, opts) => new Date(`${iso}T00:00:00`).toLocaleDateString("en-IN", opts);
 export const dayLabel = (iso) => fmt(iso, { weekday: "long", day: "numeric", month: "long", year: "numeric" });
 export const DATE_RANGE = `${fmt(DAYS[0].date, { day: "numeric" })} & ${fmt(DAYS[1].date, { day: "numeric", month: "long", year: "numeric" })}`;
+export const dayShort = (iso) => fmt(iso, { weekday: "short", day: "numeric", month: "short" });

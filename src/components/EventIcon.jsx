@@ -48,15 +48,27 @@ export default function EventIcon({ id }) {
       )}
       {id === "akshata" && (
         <>
-          {/* rice grains showering down onto a plate */}
+          {/* blessed rice (akshate) showering onto a brass thali with a mound of rice, kumkum and a marigold */}
           <g className="e-grains">
             {GRAIN_X.map((x, i) => (
-              <ellipse key={x} cx={x} cy="8" rx="2" ry="4.2" fill="#fff6d8" stroke="#d4a437" strokeWidth=".8" style={{ "--i": i }} transform={`rotate(${(i % 3) * 25 - 25} ${x} 8)`} />
+              <ellipse key={x} cx={x} cy="6" rx="2.6" ry="5" fill="#fffaf0" stroke="#d4a437" strokeWidth="1" style={{ "--i": i }} transform={`rotate(${(i % 3) * 30 - 30} ${x} 6)`} />
             ))}
           </g>
-          <ellipse cx="40" cy="64" rx="30" ry="9" fill="#d4a437" stroke="#9c6d12" strokeWidth="2" />
-          <path d="M18 62 Q40 36 62 62Z" fill="#fff6d8" stroke="#d4a437" strokeWidth="1.5" />
-          <circle cx="40" cy="50" r="4" fill="#d6214a" />
+          <ellipse cx="40" cy="68" rx="33" ry="9" fill="#c98a2a" stroke="#8a5a14" strokeWidth="2" />
+          <ellipse cx="40" cy="65" rx="29" ry="7" fill="#f0c657" stroke="#9c6d12" strokeWidth="1.2" />
+          <path d="M14 64 Q40 22 66 64 Q40 72 14 64Z" fill="#fffaf0" stroke="#e3d4a8" strokeWidth="1.2" />
+          <g className="e-rice-dots" fill="none" stroke="#e3d4a8" strokeWidth="1.4" strokeLinecap="round">
+            <path d="M28 56 l3 1.5 M38 50 l3 1.5 M47 56 l3 1.5 M34 61 l3 1.5 M45 62 l3 1.5 M24 62 l3 1.5" />
+          </g>
+          <circle cx="40" cy="45" r="4.2" fill="#d6214a" />
+          <g transform="translate(40 33)"><g className="e-flower">
+            {[0, 72, 144, 216, 288].map((r) => (
+              <circle key={r} cx="0" cy="-5" r="3.6" fill="#f5a623" stroke="#b45f06" strokeWidth=".6" transform={`rotate(${r})`} />
+            ))}
+            <circle r="2.4" fill="#b45f06" />
+          </g></g>
+          <path className="e-spark s1" d="M10 34 l1.5 4 4 1.5 -4 1.5 -1.5 4 -1.5 -4 -4 -1.5 4 -1.5Z" fill="#f7e08a" />
+          <path className="e-spark s3" d="M68 28 l1.5 4 4 1.5 -4 1.5 -1.5 4 -1.5 -4 -4 -1.5 4 -1.5Z" fill="#f7e08a" />
         </>
       )}
     </svg>

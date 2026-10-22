@@ -1,4 +1,3 @@
-import { PeacockDefs } from "./Peacock.jsx";
 import { GarlandDefs } from "./Garland.jsx";
 
 export default function Defs() {
@@ -12,7 +11,9 @@ export default function Defs() {
     <radialGradient id="eye" cx=".5" cy=".5" r=".5">
       <stop offset="0" stopColor="#1c3f8a"/><stop offset=".45" stopColor="#17a08a"/><stop offset="1" stopColor="#d4a437"/>
     </radialGradient>
-    <PeacockDefs />
+    <linearGradient id="heart-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stopColor="#ff7aa2" /><stop offset=".55" stopColor="#e5265a" /><stop offset="1" stopColor="#a50f33" />
+    </linearGradient>
     <GarlandDefs />
     <g id="lotus">
       <path d="M0 0 C-30 -10 -42 -40 -30 -70 C-12 -50 -4 -30 0 0Z" fill="#f4a6c0"/>
