@@ -11,7 +11,7 @@
   --red-deep: #5c1233;
   --ink: #3b1a22;
   --serif: "Cormorant Garamond", Georgia, serif;
-  --script: "Great Vibes", cursive;
+  --script: "Pinyon Script", "Great Vibes", cursive;
   --sans: "Jost", system-ui, sans-serif;
 }
 
@@ -678,3 +678,4 @@ html.intro-hold .garland, html.intro-hold .garland * { animation-play-state: pau
 
 /* fireworks sit in the night sky: above the sky gradient, behind the palace scene and the timer */
 .fireworks { position: absolute; left: 0; top: 0; z-index: 0; pointer-events: none; }
+
