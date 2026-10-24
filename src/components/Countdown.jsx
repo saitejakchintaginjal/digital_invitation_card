@@ -1,6 +1,7 @@
 import { WEDDING_DATE } from "../config.js";
 import useCountdown from "../hooks/useCountdown.js";
 import CountdownScene from "./CountdownScene.jsx";
+import Fireworks from "./Fireworks.jsx";
 
 const pad = (n) => String(n).padStart(2, "0");
 const UNITS = [["d", "Days"], ["h", "Hours"], ["m", "Minutes"], ["s", "Seconds"]];
@@ -9,6 +10,7 @@ export default function Countdown() {
   const t = useCountdown(WEDDING_DATE);
   return (
     <section className="countdown reveal" id="countdown">
+      <Fireworks />
       <div className="countdown__inner">
         <p className="eyebrow">Counting Down To</p>
         <h2>Our Big Day</h2>

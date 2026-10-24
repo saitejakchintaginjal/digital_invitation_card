@@ -24,7 +24,7 @@ export default function About() {
         <div className="about__amp"><span className="about__line" /><Heart /><span className="about__line" /></div>
         <figure className="person">
           <div className="frame">
-            <img src={brideImg} alt={BRIDE.name} loading="lazy" style={{ objectPosition: "50% 30%" }} />
+            <img src={brideImg} alt={BRIDE.name} loading="lazy" style={{ objectPosition: "50% 6%" }} />
           </div>
           <figcaption>
             <h3>{BRIDE.name}</h3>

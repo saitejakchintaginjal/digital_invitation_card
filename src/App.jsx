@@ -1,4 +1,5 @@
 import Defs from "./components/Defs.jsx";
+import Intro from "./components/Intro.jsx";
 import Nav from "./components/Nav.jsx";
 import Hero from "./components/Hero.jsx";
 import Names from "./components/Names.jsx";
@@ -19,6 +20,7 @@ export default function App() {
   return (
     <>
       <Defs />
+      <Intro />
       <div className="progress" aria-hidden="true" />
       <Nav />
       <Hero />
