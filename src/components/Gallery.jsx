@@ -6,6 +6,7 @@ import brideChild from "../assets/story/bride.jpg";
 import coupleImg from "../assets/story/couple.jpg";
 import selfieImg from "../assets/story/selfie.jpg";
 import retroImg from "../assets/story/retro.jpg";
+import Ornaments from "./Ornaments.jsx";
 
 // Childhood photos that open the story.
 const STORY = [
@@ -87,107 +88,113 @@ export default function Gallery() {
   }, [open, step]);
 
   return (
-    <section className="gallery reveal" id="gallery">
-      <div className="section-head">
-        <p className="eyebrow">Our Story</p>
-        <h2>Photo Gallery</h2>
-        <p className="lead">Two little people, two different homes &mdash; and a story already being written.</p>
-      </div>
+    <>
+      {/* ---- 1. Our story: childhood polaroids joined by a golden thread ---- */}
+      <section className="gallery slide reveal" id="gallery">
+        <div className="section-head">
+          <p className="eyebrow">Our Story</p>
+          <h2>Photo Gallery</h2>
+          <p className="lead">Two little hearts, two different worlds.</p>
+        </div>
 
-      {/* ---- Once upon a time: childhood polaroids joined by a golden thread ---- */}
-      <div className="story">
-        <Polaroid photo={STORY[0]} index={0} side="l" onOpen={setOpen} />
+        <div className="story">
+          <Polaroid photo={STORY[0]} index={0} side="l" onOpen={setOpen} />
 
-        <div className="story__thread" aria-hidden="true">
-          <svg viewBox="0 12 200 96">
-            <path className="thread" d="M0 60 C40 10 70 10 100 60 C130 110 160 110 200 60" />
-            {/* outer group positions the heart; the inner group is the one that beats */}
-            <g transform="translate(100 60)">
-              <g className="thread__heart">
-                <path d="M0 10 C-22 -6 -14 -22 0 -11 C14 -22 22 -6 0 10Z" />
+          <div className="story__thread" aria-hidden="true">
+            <svg viewBox="0 12 200 96">
+              <path className="thread" d="M0 60 C40 10 70 10 100 60 C130 110 160 110 200 60" />
+              {/* outer group positions the heart; the inner group is the one that beats */}
+              <g transform="translate(100 60)">
+                <g className="thread__heart">
+                  <path d="M0 10 C-22 -6 -14 -22 0 -11 C14 -22 22 -6 0 10Z" />
+                </g>
               </g>
-            </g>
-          </svg>
-          <span>Written in the stars</span>
+            </svg>
+            <span>Written in the stars</span>
+          </div>
+
+          <Polaroid photo={STORY[1]} index={1} side="r" onOpen={setOpen} />
         </div>
 
-        <Polaroid photo={STORY[1]} index={1} side="r" onOpen={setOpen} />
-      </div>
-
-      <p className="story__line">
-        <span>Years later&hellip;</span> they found each other.
-      </p>
-
-      {/* ---- Featured couple photo ---- */}
-      <div className="feature">
-        <button className="feature__photo" onClick={() => setOpen(FEATURE_INDEX)} aria-label="Open photo: Rochan and Nikita together">
-          <span className="feature__frame">
-            <img src={FEATURE.src} alt={FEATURE.alt} loading="lazy" style={{ objectPosition: FEATURE.pos }} />
-          </span>
-        </button>
-        <div className="feature__text">
-          <p className="eyebrow">Together</p>
-          <p className="feature__script">Two hearts, one smile</p>
-          <p>
-            No grand words were needed &mdash; just a glance, a gentle touch and a smile that said it all. In each
-            other, {GROOM.name} and {BRIDE.name} found a friend, a partner and a home.
-          </p>
-          <span className="feature__sign" aria-hidden="true">{GROOM.name} <Heart /> {BRIDE.name}</span>
-        </div>
-      </div>
-
-      {/* ---- Playful side: selfie + retro ---- */}
-      <div className="play">
-        <p className="eyebrow">Just for Fun</p>
-        <p className="play__script">Always up for a laugh</p>
-        <p className="play__text">
-          Between the big moments are the little ones &mdash; sunny selfies, silly poses and a flair for the filmy.
-          Whatever the frame, the smiles stay the same.
+        <p className="story__line">
+          <span>And Then, There Was Us</span>
+          A simple hello turned into something beautiful.
         </p>
-        <div className="play__grid">
-          {PLAY.map((p, i) => (
-            <button key={p.key} className={`snap snap--${p.variant}`} onClick={() => setOpen(PLAY_INDEX + i)} aria-label={`Open photo: ${p.label}`}>
-              <span className="snap__img">
-                <img src={p.src} alt={p.alt} loading="lazy" style={{ objectPosition: p.pos }} />
-              </span>
-              <span className="snap__cap">{p.label}</span>
-              <span className="snap__note">{p.note}</span>
-            </button>
-          ))}
-        </div>
-      </div>
+      </section>
 
-      {/* ---- Moments together ---- */}
-      <h3 className="gallery__sub">Moments Together</h3>
-      <div className="gallery__grid">
-        {MOMENTS.map((p, i) => (
-          <button key={p.src} className="gallery__item" onClick={() => setOpen(MOMENTS_INDEX + i)} aria-label={`Open photo ${i + 1}`}>
-            <span className="gallery__pic">
-              <img src={p.src} alt={p.alt} loading="lazy" />
-              {p.caption && <span className="gallery__cap">{p.caption}</span>}
+      {/* ---- 2. Featured couple photo ---- */}
+      <section className="gallery gallery--b slide reveal" id="gallery-together">
+      <Ornaments />
+        <div className="feature">
+          <button className="feature__photo" onClick={() => setOpen(FEATURE_INDEX)} aria-label="Open photo: Rochan and Nikita together">
+            <span className="feature__frame">
+              <img src={FEATURE.src} alt={FEATURE.alt} loading="lazy" style={{ objectPosition: FEATURE.pos }} />
             </span>
           </button>
-        ))}
-        {Array.from({ length: PLACEHOLDERS }, (_, i) => (
-          <div key={`ph${i}`} className="gallery__item gallery__item--ph" aria-hidden="true">
-            <svg viewBox="0 0 120 120">
-              <circle cx="46" cy="44" r="13" /><path d="M24 96c0-20 10-30 22-30s22 10 22 30Z" />
-              <circle cx="80" cy="46" r="12" /><path d="M60 96c0-18 9-28 20-28s20 10 20 28Z" />
-            </svg>
-            <span>Photo coming soon</span>
+          <div className="feature__text">
+            <p className="eyebrow">Together</p>
+            <p className="feature__script">Our Kind of Love!</p>
+            <p>A little laughter, a little drama and a whole lot of love.</p>
+            <span className="feature__sign" aria-hidden="true">{GROOM.name} <Heart /> {BRIDE.name}</span>
           </div>
-        ))}
-      </div>
+        </div>
+      </section>
 
-      <div className="engage">
-        <p className="eyebrow">The Engagement</p>
-        <p className="engage__script">A promise made with blessings</p>
-        <p className="engage__text">
-          Before the wedding came the quiet beginning &mdash; garlands of roses and jasmine, gifts exchanged and the
-          blessings of both families. Two smiles, one yes, and the first step of a journey we can&rsquo;t wait to
-          celebrate with you.
-        </p>
-      </div>
+      {/* ---- 3. A promise of forever: selfie + retro ---- */}
+      <section className="gallery gallery--c slide reveal" id="gallery-forever">
+      <Ornaments />
+        <div className="play">
+          <p className="eyebrow">Our Forever</p>
+          <p className="play__script">A Promise of Forever</p>
+          <p className="play__text">With our families’ blessings, we said yes to forever.</p>
+          <div className="play__grid">
+            {PLAY.map((p, i) => (
+              <button key={p.key} className={`snap snap--${p.variant}`} onClick={() => setOpen(PLAY_INDEX + i)} aria-label={`Open photo: ${p.label}`}>
+                <span className="snap__img">
+                  <img src={p.src} alt={p.alt} loading="lazy" style={{ objectPosition: p.pos }} />
+                </span>
+                <span className="snap__cap">{p.label}</span>
+                <span className="snap__note">{p.note}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---- 4. Moments together + the engagement ---- */}
+      <section className="gallery gallery--d slide reveal" id="gallery-moments">
+      <Ornaments />
+        <h3 className="gallery__sub">Moments Together</h3>
+        <div className="gallery__grid">
+          {MOMENTS.map((p, i) => (
+            <button key={p.src} className="gallery__item" onClick={() => setOpen(MOMENTS_INDEX + i)} aria-label={`Open photo ${i + 1}`}>
+              <span className="gallery__pic">
+                <img src={p.src} alt={p.alt} loading="lazy" />
+                {p.caption && <span className="gallery__cap">{p.caption}</span>}
+              </span>
+            </button>
+          ))}
+          {Array.from({ length: PLACEHOLDERS }, (_, i) => (
+            <div key={`ph${i}`} className="gallery__item gallery__item--ph" aria-hidden="true">
+              <svg viewBox="0 0 120 120">
+                <circle cx="46" cy="44" r="13" /><path d="M24 96c0-20 10-30 22-30s22 10 22 30Z" />
+                <circle cx="80" cy="46" r="12" /><path d="M60 96c0-18 9-28 20-28s20 10 20 28Z" />
+              </svg>
+              <span>Photo coming soon</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="engage">
+          <p className="eyebrow">The Engagement</p>
+          <p className="engage__script">A promise made with blessings</p>
+          <p className="engage__text">
+            Before the wedding came the quiet beginning &mdash; garlands of roses and jasmine, gifts exchanged and the
+            blessings of both families. Two smiles, one yes, and the first step of a journey we can&rsquo;t wait to
+            celebrate with you.
+          </p>
+        </div>
+      </section>
 
       {open !== null && (
         <div className="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" onClick={close}>
@@ -197,6 +204,6 @@ export default function Gallery() {
           <img src={ALL[open].src} alt={ALL[open].alt} onClick={(e) => e.stopPropagation()} />
         </div>
       )}
-    </section>
+    </>
   );
 }

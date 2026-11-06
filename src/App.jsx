@@ -1,6 +1,8 @@
 import Defs from "./components/Defs.jsx";
 import Intro from "./components/Intro.jsx";
-import Nav from "./components/Nav.jsx";
+import AutoScroll from "./components/AutoScroll.jsx";
+import Music from "./components/Music.jsx";
+import FlowerShower from "./components/FlowerShower.jsx";
 import Hero from "./components/Hero.jsx";
 import Names from "./components/Names.jsx";
 import Timeline from "./components/Timeline.jsx";
@@ -22,7 +24,9 @@ export default function App() {
       <Defs />
       <Intro />
       <div className="progress" aria-hidden="true" />
-      <Nav />
+      <AutoScroll />
+      <Music />
+      <FlowerShower />
       <Hero />
       <Names />
       <Timeline />

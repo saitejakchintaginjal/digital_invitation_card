@@ -1,8 +1,10 @@
 import { VENUE, MAPS_URL } from "../config.js";
+import Ornaments from "./Ornaments.jsx";
 
 export default function Know() {
   return (
-    <section className="know reveal" id="know">
+    <section className="know slide reveal" id="know">
+      <Ornaments />
       <div className="section-head">
         <p className="eyebrow">For Our Guests</p>
         <h2>Things to Know</h2>

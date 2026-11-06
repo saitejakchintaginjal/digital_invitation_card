@@ -1,4 +1,4 @@
-import { GarlandDefs } from "./Garland.jsx";
+import BlossomDefs from "./Blossoms.jsx";
 
 export default function Defs() {
   return (
@@ -14,7 +14,13 @@ export default function Defs() {
     <linearGradient id="heart-grad" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stopColor="#ff7aa2" /><stop offset=".55" stopColor="#e5265a" /><stop offset="1" stopColor="#a50f33" />
     </linearGradient>
-    <GarlandDefs />
+    <BlossomDefs />
+    <linearGradient id="brass-h" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stopColor="#7a5412" /><stop offset=".18" stopColor="#c8962c" /><stop offset=".34" stopColor="#fff0a8" /><stop offset=".52" stopColor="#d9a63a" /><stop offset=".8" stopColor="#9a6a16" /><stop offset="1" stopColor="#5e3e0a" />
+    </linearGradient>
+    <linearGradient id="brass-v" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#f3d27a" /><stop offset="1" stopColor="#8a5d12" /></linearGradient>
+    <radialGradient id="brass-ball" cx=".35" cy=".3" r=".85"><stop offset="0" stopColor="#fff3b8" /><stop offset=".5" stopColor="#d6a232" /><stop offset="1" stopColor="#7a5210" /></radialGradient>
+    <linearGradient id="brass-in" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#2a1804" /><stop offset="1" stopColor="#6b4a10" /></linearGradient>
     <g id="lotus">
       <path d="M0 0 C-30 -10 -42 -40 -30 -70 C-12 -50 -4 -30 0 0Z" fill="#f4a6c0"/>
       <path d="M0 0 C30 -10 42 -40 30 -70 C12 -50 4 -30 0 0Z" fill="#f4a6c0"/>

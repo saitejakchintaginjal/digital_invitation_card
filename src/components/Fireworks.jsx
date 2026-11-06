@@ -13,10 +13,19 @@ const PALETTES = [
   ["#c58bff", "#8f6bff", "#e5d0ff"],        // violet
   ["#7fe0ff", "#4fb8ff", "#d4f3ff"],        // sky
 ];
+// Daytime sky: saturated colours that show up on light blue (night mode uses glowing, additive light instead)
+const DAY_PALETTES = [
+  ["#ff2e63", "#ff5c8a", "#ff9ab8"],        // hot pink
+  ["#ff7a00", "#ff9d2e", "#ffc266"],        // orange
+  ["#8a2be2", "#a855f7", "#c9a0ff"],        // purple
+  ["#e8a900", "#ffc400", "#ffe066"],        // gold
+  ["#12b886", "#2fd9a5", "#8af0d2"],        // green
+  ["#e03131", "#ff5a5a", "#ff9a9a"],        // red
+];
 const rand = (a, b) => a + Math.random() * (b - a);
 const pick = (a) => a[Math.floor(Math.random() * a.length)];
 
-export default function Fireworks() {
+export default function Fireworks({ day = false, horizon: horizonFrac = null }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -25,6 +34,7 @@ export default function Fireworks() {
     const ctx = canvas.getContext("2d");
     if (!ctx || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
 
+    const palettes = day ? DAY_PALETTES : PALETTES;
     let W = 0, H = 0, horizon = 0, dpr = 1;
     let rockets = [], sparks = [];
     let raf = 0, last = 0, nextLaunch = 0, running = false;
@@ -35,14 +45,14 @@ export default function Fireworks() {
       canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
       canvas.style.width = W + "px"; canvas.style.height = H + "px";
       const scene = section.querySelector(".cd-scene-wrap");
-      horizon = H - (scene ? scene.offsetHeight : H * 0.4) * 0.5; // the palace sits on this line
+      horizon = horizonFrac != null ? H * horizonFrac : H - (scene ? scene.offsetHeight : H * 0.4) * 0.5; // rockets leave from this line
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
     const launch = () => {
       const x = rand(W * 0.08, W * 0.92);
       const topY = rand(H * 0.1, Math.max(H * 0.16, horizon * 0.62));
-      rockets.push({ x, y: horizon - 8, tx: x + rand(-40, 40), ty: topY, vy: -rand(380, 520), color: pick(PALETTES), trail: [] });
+      rockets.push({ x, y: horizon - 8, tx: x + rand(-40, 40), ty: topY, vy: -rand(380, 520), color: pick(palettes), trail: [] });
     };
 
     const burst = (x, y, palette) => {
@@ -56,8 +66,8 @@ export default function Fireworks() {
         sparks.push({
           x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v,
           life: 1, decay: kind === "willow" ? rand(0.18, 0.28) : rand(0.34, 0.6),
-          g: kind === "willow" ? 70 : 95, drag: kind === "willow" ? 0.985 : 0.975, size: rand(1.1, 2.0),
-          color: kind === "willow" ? "#ffd36b" : pick(palette), crackle: kind === "crackle" && Math.random() < 0.35, twinkle: Math.random() < 0.4,
+          g: kind === "willow" ? 70 : 95, drag: kind === "willow" ? 0.985 : 0.975, size: day ? rand(1.5, 2.6) : rand(1.1, 2.0),
+          color: kind === "willow" ? (day ? "#f0a500" : "#ffd36b") : pick(palette), crackle: kind === "crackle" && Math.random() < 0.35, twinkle: Math.random() < 0.4,
         });
       }
       // soft flash at the centre
@@ -72,8 +82,10 @@ export default function Fireworks() {
       ctx.globalCompositeOperation = "destination-out";
       ctx.fillStyle = "rgba(0, 0, 0, 0.22)";
       ctx.fillRect(0, 0, W, H);
-      ctx.globalCompositeOperation = "lighter";
+      ctx.globalCompositeOperation = day ? "source-over" : "lighter";
+      const hold = document.documentElement.classList.contains("intro-hold"); // wait until the entry card has gone
 
+      if (hold) nextLaunch = Math.max(nextLaunch, t + 500);
       if (t > nextLaunch) {
         launch();
         if (Math.random() < 0.4) setTimeout(launch, rand(150, 420));
@@ -86,7 +98,7 @@ export default function Fireworks() {
         for (let i = 0; i < r.trail.length; i++) {
           const [px, py] = r.trail[i];
           ctx.globalAlpha = (i / r.trail.length) * 0.8;
-          ctx.fillStyle = "#ffe7a8";
+          ctx.fillStyle = day ? "#ff9d2e" : "#ffe7a8";
           ctx.beginPath(); ctx.arc(px, py, 1.7 * (i / r.trail.length) + 0.4, 0, 7); ctx.fill();
         }
         ctx.globalAlpha = 1;
@@ -98,13 +110,13 @@ export default function Fireworks() {
       sparks = sparks.filter((s) => {
         s.life -= s.decay * dt;
         if (s.life <= 0) {
-          if (s.crackle) for (let k = 0; k < 7; k++) { const a = rand(0, 7), v = rand(25, 70); born.push({ x: s.x, y: s.y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, life: 1, decay: rand(1.4, 2.2), g: 60, drag: 0.96, size: 1.1, color: "#fff2c4", twinkle: true }); }
+          if (s.crackle) for (let k = 0; k < 7; k++) { const a = rand(0, 7), v = rand(25, 70); born.push({ x: s.x, y: s.y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, life: 1, decay: rand(1.4, 2.2), g: 60, drag: 0.96, size: 1.1, color: day ? "#ffb300" : "#fff2c4", twinkle: true }); }
           return false;
         }
         s.vx *= s.drag; s.vy = s.vy * s.drag + s.g * dt; s.x += s.vx * dt; s.y += s.vy * dt;
         if (s.flash) {
           const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.size * (1.6 - s.life));
-          g.addColorStop(0, "rgba(255,246,216,.55)"); g.addColorStop(1, "rgba(255,246,216,0)");
+          g.addColorStop(0, day ? "rgba(255,255,255,.7)" : "rgba(255,246,216,.55)"); g.addColorStop(1, day ? "rgba(255,255,255,0)" : "rgba(255,246,216,0)");
           ctx.globalAlpha = s.life; ctx.fillStyle = g; ctx.fillRect(s.x - 40, s.y - 40, 80, 80); ctx.globalAlpha = 1;
           return true;
         }
@@ -128,5 +140,5 @@ export default function Fireworks() {
     return () => { io.disconnect(); ro.disconnect(); stop(); };
   }, []);
 
-  return <canvas ref={ref} className="fireworks" aria-hidden="true" />;
+  return <canvas ref={ref} className={`fireworks${day ? " fireworks--hero" : ""}`} aria-hidden="true" />;
 }

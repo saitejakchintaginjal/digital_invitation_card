@@ -2,10 +2,12 @@ import { GROOM, BRIDE } from "../config.js";
 import Heart from "./Heart.jsx";
 import groomImg from "../assets/story/groom-portrait.jpg";
 import brideImg from "../assets/story/bride-portrait.jpg";
+import Ornaments from "./Ornaments.jsx";
 
 export default function About() {
   return (
-    <section className="about reveal" id="about">
+    <section className="about slide reveal" id="about">
+      <Ornaments />
       <div className="section-head">
         <p className="eyebrow">Two Hearts, One Story</p>
         <h2>Meet the Bride &amp; Groom</h2>
@@ -18,7 +20,7 @@ export default function About() {
           <figcaption>
             <h3>{GROOM.name}</h3>
             <p className="role">The Groom</p>
-            <p>Son of {GROOM.parents} &mdash; calm, warm-hearted and always ready with a smile, he is looking forward to beginning this new chapter surrounded by family and friends.</p>
+            <p>Calm, kind-hearted and always ready with a smile.</p>
           </figcaption>
         </figure>
         <div className="about__amp"><span className="about__line" /><Heart /><span className="about__line" /></div>
@@ -29,7 +31,7 @@ export default function About() {
           <figcaption>
             <h3>{BRIDE.name}</h3>
             <p className="role">The Bride</p>
-            <p>Daughter of {BRIDE.parents} &mdash; graceful, cheerful and full of life, she brings colour to every room &mdash; and now to a lifetime together.</p>
+            <p>Cheerful, full of life and bringing colour to every moment.</p>
           </figcaption>
         </figure>
       </div>
