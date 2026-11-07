@@ -5,6 +5,7 @@ export default function Defs() {
     <>
 <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
   <defs>
+    <clipPath id="heart-clip" clipPathUnits="objectBoundingBox"><path d="M.5 1 C.12 .72 0 .5 0 .29 C0 .1 .12 0 .27 0 C.39 0 .46 .06 .5 .16 C.54 .06 .61 0 .73 0 C.88 0 1 .1 1 .29 C1 .5 .88 .72 .5 1Z"/></clipPath>
     <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stopColor="#f7e08a"/><stop offset=".5" stopColor="#d4a437"/><stop offset="1" stopColor="#9c6d12"/>
     </linearGradient>

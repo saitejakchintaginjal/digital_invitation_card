@@ -42,6 +42,7 @@ export default function Hero() {
         <p className="hero__parents">
           Son of <strong>{GROOM.parents}</strong> and Daughter of <strong>{BRIDE.parents}</strong>
         </p>
+        <p className="hero__sub">Together with our families, we joyfully invite you to celebrate our wedding.</p>
       </div>
 
       <div className="hero__stage" role="img" aria-label="The bride's maroon silk saree and the groom's white and gold dhoti, knotted together with flowers before the sacred fire">

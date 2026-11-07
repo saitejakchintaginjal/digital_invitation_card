@@ -10,7 +10,7 @@ import About from "./components/About.jsx";
 import Gallery from "./components/Gallery.jsx";
 import Know from "./components/Know.jsx";
 import Countdown from "./components/Countdown.jsx";
-import Footer from "./components/Footer.jsx";
+
 import useReveal from "./hooks/useReveal.js";
 import useScrollFx from "./hooks/useScrollFx.js";
 import useOffscreenPause from "./hooks/useOffscreenPause.js";
@@ -34,7 +34,7 @@ export default function App() {
       <Gallery />
       <Know />
       <Countdown />
-      <Footer />
+
     </>
   );
 }

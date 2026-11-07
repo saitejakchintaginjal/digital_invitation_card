@@ -3,6 +3,7 @@ import useCountdown from "../hooks/useCountdown.js";
 import CountdownScene from "./CountdownScene.jsx";
 import Fireworks from "./Fireworks.jsx";
 import Heart from "./Heart.jsx";
+import Footer from "./Footer.jsx";
 
 const pad = (n) => String(n).padStart(2, "0");
 const UNITS = [["d", "Days"], ["h", "Hours"], ["m", "Minutes"], ["s", "Seconds"]];
@@ -30,6 +31,7 @@ export default function Countdown() {
           <p className="cd-closing__see">See you at the wedding! <Heart /></p>
         </div>
       </div>
+      <Footer />
       <div className="cd-scene-wrap">
         <CountdownScene />
       </div>

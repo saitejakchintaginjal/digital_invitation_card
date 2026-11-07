@@ -12,9 +12,9 @@ import ganapatiImg from "../assets/ganapati.jpg";
   phase 0 floating / waiting for the tap / opening | 1 dissolving | 2 done
   (Visitors who prefer reduced motion skip the intro.)
 */
-const FLY_MS = 5200;        // how long the card takes to float in and settle
-const READY_MS = 5600;      // the card has landed: show "Tap to open"
-const FADE_AFTER_MS = 1300; // after the doors start to open, how long until the dissolve begins (about 75% open)
+const FLY_MS = 6200;        // how long the card takes to float in and settle
+const READY_MS = 6600;      // the card has landed: show "Tap to open"
+const FADE_AFTER_MS = 2100; // after the doors start to open, how long until the dissolve begins (about 75% open)
 const FADE_MS = 2600;       // how long the dissolve takes (CSS .intro transition must match)
 
 /* ---------- smooth flight ----------

@@ -88,6 +88,45 @@ function Petal({ id, light, deep }) {
   );
 }
 
+/* a lotus seen from the side: pointed petals shaded white at the base to deep pink at the tips, with veins, a golden heart and a leaf pad. Base sits on (0,0), about 38 tall */
+function Lotus() {
+  const petal = (h, w) => `M0 0 C${-w} ${-h * 0.2} ${-w * 0.95} ${-h * 0.72} 0 ${-h} C${w * 0.95} ${-h * 0.72} ${w} ${-h * 0.2} 0 0Z`;
+  const P = ({ a, h, w, g, k }) => (
+    <g key={k} transform={`rotate(${a})`}>
+      <path d={petal(h, w)} fill={`url(#${g})`} stroke="rgba(176,30,92,.45)" strokeWidth=".35" />
+      <path d={`M0 -2 C-.6 ${-h * 0.4} -.4 ${-h * 0.7} 0 ${-h * 0.93}`} fill="none" stroke="rgba(255,255,255,.55)" strokeWidth=".35" />
+      <path d={`M-1.2 -3 C${-w * 0.55} ${-h * 0.3} ${-w * 0.5} ${-h * 0.6} -1.5 ${-h * 0.88}`} fill="none" stroke="rgba(176,30,92,.22)" strokeWidth=".3" />
+      <path d={`M1.2 -3 C${w * 0.55} ${-h * 0.3} ${w * 0.5} ${-h * 0.6} 1.5 ${-h * 0.88}`} fill="none" stroke="rgba(176,30,92,.22)" strokeWidth=".3" />
+      <ellipse cx={-w * 0.3} cy={-h * 0.55} rx={w * 0.16} ry={h * 0.22} fill="#fff" opacity=".22" />
+    </g>
+  );
+  return (
+    <>
+      <linearGradient id="bl-lot-back" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0" stopColor="#f6dfe8" /><stop offset=".45" stopColor="#e993b4" /><stop offset="1" stopColor="#c2427c" />
+      </linearGradient>
+      <linearGradient id="bl-lot-mid" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0" stopColor="#fff3f7" /><stop offset=".4" stopColor="#f7b9cf" /><stop offset="1" stopColor="#d9578f" />
+      </linearGradient>
+      <linearGradient id="bl-lot-front" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0" stopColor="#fffafb" /><stop offset=".35" stopColor="#fcd3e1" /><stop offset=".8" stopColor="#ef8db2" /><stop offset="1" stopColor="#e0629a" />
+      </linearGradient>
+      <radialGradient id="bl-lot-leaf" cx=".5" cy=".4" r=".7">
+        <stop offset="0" stopColor="#5fae5a" /><stop offset="1" stopColor="#2f7a3a" />
+      </radialGradient>
+      <g id="bl-lotus">
+        <ellipse cx="0" cy="1.2" rx="23" ry="3.6" fill="url(#bl-lot-leaf)" stroke="#256a31" strokeWidth=".4" />
+        <path d="M-14 1.2 L0 1.2 M14 1.2 L0 1.2 M-8 -.4 L0 1.2 M8 -.4 L0 1.2" stroke="rgba(220,255,210,.4)" strokeWidth=".3" />
+        {[[-74, 20, 7, "bl-lot-back"], [74, 20, 7, "bl-lot-back"], [-52, 27, 8, "bl-lot-back"], [52, 27, 8, "bl-lot-back"], [-32, 33, 8.5, "bl-lot-mid"], [32, 33, 8.5, "bl-lot-mid"]].map(([a, h, w, g], k) => P({ a, h, w, g, k }))}
+        <ellipse cx="0" cy="-13" rx="5.2" ry="6.5" fill="#f8d04a" opacity=".9" />
+        {Array.from({ length: 9 }, (_, k) => <circle key={k} cx={(k - 4) * 1.1} cy={-17 + Math.abs(k - 4) * 0.7} r=".7" fill="#e49a14" />)}
+        {[[-14, 35, 8, "bl-lot-mid"], [14, 35, 8, "bl-lot-mid"], [-6, 38, 7.6, "bl-lot-front"], [6, 38, 7.6, "bl-lot-front"]].map(([a, h, w, g], k) => P({ a, h, w, g, k: "f" + k }))}
+        <path d="M-6 -2 C-9 -10 -9 -24 -4 -33" fill="none" stroke="#fff" strokeWidth=".7" strokeLinecap="round" opacity=".35" />
+      </g>
+    </>
+  );
+}
+
 export default function BlossomDefs() {
   return (
     <>
@@ -96,6 +135,7 @@ export default function BlossomDefs() {
       <Rose id="bl-rose" edge="#ff8aa4" mid="#e23a62" deep="#9c0f33" />
       <Rose id="bl-rose2" edge="#ffc4d2" mid="#f27a9c" deep="#c23a62" />
       <Jasmine />
+      <Lotus />
       <Petal id="bl-petal" light="#ff9bb5" deep="#d93a66" />
       <Petal id="bl-petal2" light="#ffd2dc" deep="#f08aa6" />
     </>

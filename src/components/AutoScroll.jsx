@@ -57,7 +57,7 @@ export default function AutoScroll() {
     busyRef.current = true;
     const from = window.scrollY;
     const dist = to - from;
-    const dur = Math.min(5800, Math.max(2800, Math.abs(dist) * 4.8));
+    const dur = Math.min(12800, Math.max(6100, Math.abs(dist) * 10.5));
     const t0 = performance.now();
     let lastRun = t0;
     let finished = false;
@@ -78,6 +78,12 @@ export default function AutoScroll() {
   const advance = useCallback(() => {
     if (!wantRef.current) return;
     if (document.querySelector(".lightbox")) { schedule(600, advance); return; } // never scroll behind an open photo
+    // the "save the date" card is still being washed clean: wait here until the date is showing
+    const sc = document.querySelector(".scratch");
+    if (sc && !sc.classList.contains("is-revealed")) {
+      const r = sc.getBoundingClientRect();
+      if (r.bottom > 40 && r.top < window.innerHeight - 40) { schedule(600, advance); return; }
+    }
     const y = window.scrollY;
     const next = computeStops().find((s) => s > y + 8);
     if (next == null) { wantRef.current = false; return; } // reached the end
@@ -102,6 +108,13 @@ export default function AutoScroll() {
     begin();
     return () => { mo.disconnect(); wantRef.current = false; clearTimeout(timer.current); clearInterval(poll.current); cancelAnimationFrame(raf.current); };
   }, [play, reduce]);
+
+  // the date has just been revealed: give it a moment, then carry on
+  useEffect(() => {
+    const onRevealed = () => { if (wantRef.current && !busyRef.current) schedule(DWELL_MS, advance); };
+    window.addEventListener("scratch:revealed", onRevealed);
+    return () => window.removeEventListener("scratch:revealed", onRevealed);
+  }, [advance, schedule]);
 
   // the visitor takes over: stop at once, then carry on after 1.5s of stillness
   useEffect(() => {

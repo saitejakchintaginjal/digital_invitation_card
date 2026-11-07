@@ -610,7 +610,7 @@ html.intro-hold .splash { animation-play-state: paused !important; }
 /* the card is 9:16 like its artwork: it fills a phone screen (edges cropped a touch) */
 .intro__stage { position: relative; width: 100%; height: 100%; opacity: 0; will-change: transform, opacity; }
 .idoors { position: absolute; inset: 0; perspective: 2400px; perspective-origin: 50% 50%; }
-.idoor { position: absolute; left: 0; right: 0; height: 50%; transform-style: preserve-3d; transition: transform 2.4s cubic-bezier(.45, .05, .2, 1); will-change: transform; }
+.idoor { position: absolute; left: 0; right: 0; height: 50%; transform-style: preserve-3d; transition: transform 3.8s cubic-bezier(.45, .05, .2, 1); will-change: transform; }
 .idoor--t { top: 0; transform-origin: 50% 0; }
 .idoor--b { bottom: 0; transform-origin: 50% 100%; }
 .is-open .idoor--t { transform: rotateX(104deg); }
@@ -928,4 +928,72 @@ html.intro-active .shower { display: none; }
 @media (max-width: 400px) {
   .hero__text { padding-top: 3.4rem; }
   .hero__parents { font-size: .9rem; margin-bottom: .3rem; }
+}
+
+/* ---------- Peacock art: truly centred on phones; scratch card is now an arch ---------- */
+@media (max-width: 600px) {
+  .names__art { width: 100vw; max-width: none; margin-left: calc(50% - 50vw); margin-right: 0; }
+}
+.scratch { width: min(80vw, 360px); height: clamp(210px, 60vw, 260px); border-radius: 120px 120px 24px 24px; }
+.scratch__under { border-radius: 120px 120px 24px 24px; outline-offset: 5px; }
+.scratch__foil { border-radius: 120px 120px 24px 24px; }
+
+/* ---------- Teja Designs credit lives at the bottom of the countdown page (no separate footer screen) ---------- */
+.cd-brand { position: absolute; left: 0; right: 0; bottom: .7rem; z-index: 6; display: flex; flex-direction: column; align-items: center; gap: .1rem; padding-top: 1.6rem; pointer-events: none; background: linear-gradient(to top, rgba(40, 8, 24, .72), rgba(40, 8, 24, 0)); color: var(--gold-light); text-align: center; }
+.cd-brand__logo { width: 34px; }
+.cd-brand__name { margin: 0; font-family: var(--serif); font-size: 1rem; letter-spacing: .26em; text-indent: .26em; text-transform: uppercase; text-shadow: 0 1px 6px rgba(0, 0, 0, .7); }
+.cd-brand__small { margin: 0; font-size: .7rem; opacity: .9; text-shadow: 0 1px 5px rgba(0, 0, 0, .7); }
+/* first page: the picture's top edge fades less, so it reads as a picture and not a haze */
+.hero__stage { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 7%); mask-image: linear-gradient(to bottom, transparent 0, #000 7%); }
+@media (min-width: 761px) {
+  .hero__stage { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 7%), linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 7%), linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%); }
+}
+@media (max-width: 760px) {
+  .hero__stage { aspect-ratio: 5 / 6; max-height: 58dvh; }
+}
+
+/* thicker, fuller top garland */
+.orn--top { height: 76px; }
+
+/* realistic lotus row is a little taller */
+.orn--bottom { height: 62px; }
+
+/* ---------- Save the date: a heart ---------- */
+.scratch { width: min(82vw, 340px); height: auto; aspect-ratio: 1 / .92; border-radius: 0; filter: drop-shadow(0 12px 14px rgba(143, 29, 56, .38)); }
+.scratch__under { border: 0; outline: 0; box-shadow: none; background: none; border-radius: 0; padding-bottom: 7%; overflow: visible; }
+.scratch__bg { position: absolute; inset: 0; clip-path: url(#heart-clip); background: radial-gradient(circle at 35% 25%, #b3263f, var(--red-deep) 75%); }
+.scratch__foil { border-radius: 0; filter: none; }
+.scratch__rim { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 3; }
+.scratch__rim path { fill: none; stroke: #e6bd58; stroke-width: 3px; stroke-linejoin: round; }
+.scratch__day { font-size: clamp(3.8rem, 19vw, 5.8rem); }
+.scratch__mon { font-size: clamp(.8rem, 3.7vw, 1.15rem); letter-spacing: .2em; text-indent: .2em; }
+.scratch.is-revealed .scratch__txt { transform: scale(1.06); }
+
+/* the finger that scratches (its tip is at 19px 4px) */
+.scratch__coin { width: 44px; height: 58px; transform-origin: 19px 4px; filter: drop-shadow(0 5px 5px rgba(0, 0, 0, .35)); z-index: 4; }
+
+/* water droplets: the effects layer reaches above the card so the drops can fall into it */
+.scratch__fx { position: absolute; left: 0; top: -110px; width: 100%; height: calc(100% + 110px); pointer-events: none; z-index: 4; }
+
+/* ---------- Peacock art: taller and blended into the page ---------- */
+.names__stage { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 30%), linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 30%), linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%); -webkit-mask-composite: source-in; mask-composite: intersect; }
+.names.slide .names__art { margin-top: auto; }
+@media (max-width: 600px) {
+  /* a larger picture, centred, with a little of each side cropped (the fan overlays scale with it) */
+  .names__stage { width: 140%; margin-left: -20%; }
+}
+@media (min-width: 601px) {
+  .names.slide .names__art { width: min(100%, calc(50dvh * 2.343)); }
+}
+@media (max-width: 600px) {
+  .names__stage { width: 150%; margin-left: -25%; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 24%), linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 24%), linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%); }
+  .scratch { width: min(88vw, 370px); }
+}
+
+/* peacock art: both birds and both tail fans fully visible, the leaf garland in the middle crisp */
+@media (max-width: 600px) {
+  .names__stage { width: 110%; margin-left: -5%; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 5%), linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 5%), linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%); }
+}
+@media (min-width: 601px) {
+  .names__stage { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 5%), linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 5%), linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%); }
 }

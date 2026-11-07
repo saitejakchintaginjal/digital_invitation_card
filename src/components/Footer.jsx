@@ -2,8 +2,8 @@ import Heart from "./Heart.jsx";
 export default function Footer() {
   return (
     <>
-<footer className="footer">
-  <svg className="footer__logo" viewBox="0 0 120 120" aria-label="Golden peacock logo">
+<div className="cd-brand">
+  <svg className="cd-brand__logo" viewBox="0 0 120 120" aria-label="Golden peacock logo">
     <g fill="none" stroke="url(#gold)" strokeWidth="3" strokeLinecap="round">
       <path d="M60 78 C20 70 10 30 30 12"/><path d="M60 78 C30 66 26 34 40 18"/><path d="M60 78 C44 62 44 38 52 22"/>
       <path d="M60 78 C100 70 110 30 90 12"/><path d="M60 78 C90 66 94 34 80 18"/><path d="M60 78 C76 62 76 38 68 22"/>
@@ -15,9 +15,9 @@ export default function Footer() {
       <path d="M57 54 l3 -12 l3 12Z"/><circle cx="60" cy="40" r="2.5"/>
     </g>
   </svg>
-  <p className="footer__brand">Teja Designs</p>
-  <p className="footer__small">Crafted with love · Rochan <Heart /> Nikita · 2026</p>
-</footer>
+  <p className="cd-brand__name">Teja Designs</p>
+  <p className="cd-brand__small">Crafted with love · Rochan <Heart /> Nikita · 2026</p>
+</div>
     </>
   );
 }

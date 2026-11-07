@@ -36,21 +36,41 @@ function Bell({ i }) {
   );
 }
 
+const FL = ["#bl-marigold2", "#bl-rose2", "#bl-jasmine", "#bl-marigold", "#bl-rose"];
+const swagPt = (t) => [80 * t, 6 * (1 - t) * (1 - t) + 48 * (1 - t) * t + 6 * t * t];
+
+// a hanging string of little flowers, tipped with a bud
+function Strand({ x, y0, i, k }) {
+  return (
+    <g className="orn__sway" style={{ "--d": `${-(i + k) * 0.7}s`, transformOrigin: `${x}px ${y0}px` }}>
+      <line x1={x} y1={y0} x2={x} y2={y0 + 30} stroke="#b98a24" strokeWidth="1.3" />
+      {[0, 1, 2].map((n) => <use key={n} href={FL[(i + k + n) % FL.length]} transform={`translate(${x} ${y0 + 6 + n * 9.5}) scale(${0.3 - n * 0.02})`} />)}
+      <circle cx={x} cy={y0 + 33} r="2.2" fill="url(#gold)" />
+    </g>
+  );
+}
+
 function TopUnit({ i }) {
   const bell = i % 2 === 0;
   return (
-    <svg className="orn__unit" viewBox="0 0 80 68" aria-hidden="true">
-      <path d="M0 6 Q40 24 80 6" fill="none" stroke="url(#gold)" strokeWidth="1.6" strokeLinecap="round" />
-      <circle cx="0" cy="6" r="2.4" fill="url(#gold)" /><circle cx="80" cy="6" r="2.4" fill="url(#gold)" />
-      <circle className="orn__bead" cx="20" cy="13.6" r="1.6" fill="#f7e08a" style={{ "--d": `${(i % 5) * 0.5}s` }} />
-      <circle className="orn__bead" cx="60" cy="13.6" r="1.6" fill="#f7e08a" style={{ "--d": `${((i + 2) % 5) * 0.5}s` }} />
+    <svg className="orn__unit" viewBox="0 0 80 72" aria-hidden="true">
+      {/* thick gold rope with a bright edge */}
+      <path d="M0 6 Q40 24 80 6" fill="none" stroke="#8a5f12" strokeWidth="4.4" strokeLinecap="round" />
+      <path d="M0 6 Q40 24 80 6" fill="none" stroke="url(#gold)" strokeWidth="3.4" strokeLinecap="round" />
+      <path d="M0 5.2 Q40 22.8 80 5.2" fill="none" stroke="#fff3b8" strokeWidth=".7" strokeLinecap="round" opacity=".8" />
+      <circle cx="0" cy="6" r="3.4" fill="url(#gold)" stroke="#8a5f12" strokeWidth=".5" /><circle cx="80" cy="6" r="3.4" fill="url(#gold)" stroke="#8a5f12" strokeWidth=".5" />
+      {/* a garland of small flowers along the swag */}
+      {[0.1, 0.22, 0.34, 0.66, 0.78, 0.9].map((t, n) => { const [x, y] = swagPt(t); return <use key={n} href={FL[(i + n) % FL.length]} transform={`translate(${x} ${y + 1}) scale(${n % 2 ? 0.27 : 0.33})`} />; })}
+      <Strand x={14} y0={9} i={i} k={0} />
+      <Strand x={66} y0={9} i={i} k={2} />
       {bell ? (
         <Bell i={i} />
       ) : (
         <g className="orn__sway" style={{ "--d": `${-i * 0.55}s` }}>
-          <line x1="40" y1="15" x2="40" y2="28" stroke="#b98a24" strokeWidth="1.1" />
-          <use href={i % 4 === 1 ? "#bl-marigold" : "#bl-rose"} transform="translate(40 40) scale(.9)" />
-          <path d="M40 54 V62" stroke="#3f8a45" strokeWidth="1.2" /><path d="M40 58 C34 56 32 60 34 62 C37 62 40 60 40 58Z" fill="#3f8a45" />
+          <line x1="40" y1="15" x2="40" y2="26" stroke="#b98a24" strokeWidth="1.6" />
+          <use href={i % 4 === 1 ? "#bl-marigold" : "#bl-rose"} transform="translate(40 38) scale(1.05)" />
+          <use href="#bl-jasmine" transform="translate(30 50) scale(.34)" /><use href="#bl-jasmine" transform="translate(50 50) scale(.34)" />
+          <path d="M40 53 V64" stroke="#3f8a45" strokeWidth="1.4" /><path d="M40 58 C34 56 32 60 34 62 C37 62 40 60 40 58Z" fill="#3f8a45" /><path d="M40 58 C46 56 48 60 46 62 C43 62 40 60 40 58Z" fill="#3f8a45" />
         </g>
       )}
     </svg>
@@ -59,18 +79,11 @@ function TopUnit({ i }) {
 
 function BottomUnit({ i }) {
   return (
-    <svg className="orn__unit" viewBox="0 0 80 44" aria-hidden="true">
-      <path d="M0 40 H80" stroke="url(#gold)" strokeWidth="1.2" />
-      <path d="M0 40 Q20 30 40 40 T80 40" fill="none" stroke="url(#gold)" strokeWidth="1" opacity=".7" />
+    <svg className="orn__unit" viewBox="0 0 80 56" aria-hidden="true">
+      <path d="M0 50 H80" stroke="url(#gold)" strokeWidth="1.6" />
+      <path d="M0 50 Q20 41 40 50 T80 50" fill="none" stroke="url(#gold)" strokeWidth="1" opacity=".7" />
       <g className="orn__lotus" style={{ "--d": `${-i * 0.45}s` }}>
-        <g transform="translate(40 40)">
-          <path d="M0 0 C-9 -3 -12 -14 -7 -22 C-3 -16 -1 -9 0 0Z" fill="#f4a6c0" stroke="#d9487f" strokeWidth=".6" />
-          <path d="M0 0 C9 -3 12 -14 7 -22 C3 -16 1 -9 0 0Z" fill="#f4a6c0" stroke="#d9487f" strokeWidth=".6" />
-          <path d="M0 0 C-16 -2 -21 -10 -19 -17 C-12 -14 -4 -9 0 0Z" fill="#ee86a8" stroke="#d9487f" strokeWidth=".6" />
-          <path d="M0 0 C16 -2 21 -10 19 -17 C12 -14 4 -9 0 0Z" fill="#ee86a8" stroke="#d9487f" strokeWidth=".6" />
-          <path d="M0 0 C-6 -6 -6 -20 0 -29 C6 -20 6 -6 0 0Z" fill="#fbc9d9" stroke="#d9487f" strokeWidth=".6" />
-          <circle cy="-12" r="2" fill="#f7d35c" />
-        </g>
+        <use href="#bl-lotus" transform="translate(40 49.5)" />
       </g>
       <path className="orn__spark" d="M12 14 l1.4 3.6 3.6 1.4 -3.6 1.4 -1.4 3.6 -1.4 -3.6 -3.6 -1.4 3.6 -1.4Z" fill="#f7e08a" style={{ "--d": `${(i % 4) * 0.6}s` }} />
       <path className="orn__spark" d="M68 10 l1.2 3 3 1.2 -3 1.2 -1.2 3 -1.2 -3 -3 -1.2 3 -1.2Z" fill="#f7e08a" style={{ "--d": `${((i + 2) % 4) * 0.6}s` }} />
