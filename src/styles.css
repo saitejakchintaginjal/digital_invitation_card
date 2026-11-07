@@ -997,3 +997,72 @@ html.intro-active .shower { display: none; }
 @media (min-width: 601px) {
   .names__stage { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 5%), linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 5%), linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%); }
 }
+
+/* ---------- One screen per section, also on short screens (small phones, laptops): size things by screen height ---------- */
+@media (max-height: 760px) {
+  .slide { padding-top: 4rem; padding-bottom: 1.2rem; }
+  .section-head { margin-bottom: .9rem; }
+  .section-head h2 { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+  .section-head .lead { margin-top: .4rem; font-size: .95rem; }
+  /* itinerary */
+  .timeline.slide { padding-top: 3.6rem; }
+  .timeline .section-head { margin-bottom: .5rem; }
+  .tl__card--portrait { width: min(100%, 172px, calc(21dvh * .747)); }
+  .tl__card--wide { width: min(100%, 236px, calc(13.5dvh * 1.79)); }
+  .tl__item { margin-bottom: .6rem; }
+  .tl__node { width: 64px; height: 64px; }
+  .tl__node .eicon { width: 42px; height: 42px; }
+  .tl__item { grid-template-columns: 84px 1fr; }
+  /* gallery */
+  .gallery__sub { font-size: 1.4rem; margin-bottom: .6rem; }
+  .polaroid { width: min(100%, calc(24dvh * .8)); }
+  .polaroid__cap { font-size: 1.1rem; padding: .3rem 0 .4rem; }
+  .story { gap: .6rem .5rem; }
+  .story__thread { max-width: 120px; margin-top: 0; }
+  .story__thread span { font-size: 1.1rem; }
+  .slide .story__line { margin-top: .6rem; font-size: 1rem; }
+  .story__line span { font-size: 1.5rem; }
+  .feature { gap: .9rem; }
+  .feature__photo { width: min(300px, 80%, calc(31dvh * .75)); }
+  .feature__text { font-size: 1rem; }
+  .feature__script { font-size: 1.8rem; margin-bottom: .4rem; }
+  .feature__sign { font-size: 1.5rem; margin-top: .5rem; }
+  /* know */
+  .know__grid { gap: .8rem; }
+  .tile { padding: 1.1rem 1rem; }
+  .tile svg { width: 32px; height: 32px; margin-bottom: .3rem; }
+  .tile h3 { font-size: 1.3rem; }
+  .tile p { font-size: .88rem; margin-top: .25rem; }
+}
+@media (min-width: 761px) {
+  .hero h1 { font-size: min(7rem, 10dvh); }
+  .hero__stage { width: min(100%, calc(40dvh * 1.833)); }
+}
+
+/* first page on short screens */
+@media (max-height: 760px) and (max-width: 760px) {
+  .hero__stage { max-height: 40dvh; }
+  .hero__text { padding-top: 3.3rem; }
+  .invocation { font-size: .7rem; line-height: 1.36; }
+  .hero h1 { font-size: clamp(2rem, 9.5vw, 3rem); margin: .1rem 0 0; }
+  .hero__elders { margin-top: .15rem; }
+  .hero__sub { font-size: .8rem; line-height: 1.32; }
+}
+@media (min-width: 761px) and (max-height: 900px) {
+  .hero__text { padding-top: 3rem; }
+  .invocation { line-height: 1.35; }
+  .hero__stage { width: min(100%, calc(36dvh * 1.833)); }
+  .slide { padding-top: 4rem; padding-bottom: 1rem; }
+  .timeline.slide { padding-top: 3.8rem; padding-bottom: 1rem; }
+  .countdown { --scene-h: clamp(260px, min(72vw, 42dvh), 640px); }
+}
+@media (min-width: 761px) and (max-height: 900px) {
+  .names.slide .names__art { width: min(100%, calc(42dvh * 2.343)); }
+  .tl__card--portrait { width: min(100%, calc(26dvh * .747)); }
+  .tl__card--wide { width: min(100%, calc(20dvh * 1.79)); }
+  .timeline .tl__item { margin-bottom: 1rem; }
+}
+@media (max-height: 760px) {
+  .orn--top { top: 2.3rem; height: 58px; }
+  .about.slide, .know.slide, .gallery--b.slide { padding-top: 5.9rem; }
+}
